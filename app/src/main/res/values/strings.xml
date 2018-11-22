@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">sendsms</string>
+    <string name="no_message_received">No Message Received!</string>
+</resources>
