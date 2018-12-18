@@ -16,7 +16,7 @@ public class SmsReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
-        Toast.makeText(context,"Reply Sent",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"Order Received",Toast.LENGTH_SHORT).show();
 
 
         if(bundle!=null){
@@ -25,15 +25,12 @@ public class SmsReceiver extends BroadcastReceiver {
             for(int i=0; i<recMsg.length;i++){
                 String format = bundle.getString("format");
                 recMsg[i] = SmsMessage.createFromPdu((byte[]) pdus[i], format);
-                str += "SMS Message received from: " +
+                str += "Order Received: " +
                 recMsg[i].getOriginatingAddress();
-                str += "=>";
-                str += recMsg;
+                str += "=>"+recMsg[i].getMessageBody().toString();
             }
             Toast.makeText(context,str,Toast.LENGTH_LONG).show();
-
-            TextView textView=(TextView)((Activity)context).findViewById(R.id.message);
-            textView.setText(str);
+            MainActivity.getInstance().setText(str);
         }
     }
 }

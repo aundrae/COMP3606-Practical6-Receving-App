@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import android.Manifest;
@@ -15,18 +16,19 @@ import android.Manifest;
 public class MainActivity extends AppCompatActivity {
     Button reply;
     String phonenumber, message;
-    private int SMS_PERMISSION=1;
+    private int SMS_PERMISSION=1,SMS_PERMISSION1=1,SMS_PERMISSION2=1;
+    private static MainActivity ins;
     private SmsManager manager = SmsManager.getDefault();
+    TextView view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.SEND_SMS)!=PackageManager.PERMISSION_GRANTED){
-            requestSMSPermission();
-        }
+        ins=this;
+        view=findViewById(R.id.message);
         SmsReceiver sms=new SmsReceiver();
         reply = findViewById(R.id.reply);
-        phonenumber = "6846142";
+        phonenumber = "5554";
         message = "order received";
 
     }
@@ -43,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void requestSMSPermission(){
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},SMS_PERMISSION);
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECEIVE_SMS},SMS_PERMISSION);
+    }
+    public static MainActivity getInstance(){
+        return ins;
+    }
+    public void setText(String s){
+        view.setText(s);
     }
 }
