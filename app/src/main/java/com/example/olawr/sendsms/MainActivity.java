@@ -53,4 +53,7 @@ public class MainActivity extends AppCompatActivity {
     public void setText(String s){
         view.setText(s);
     }
+    public void setNumber(String num){
+        phonenumber=num;
+    }
 }

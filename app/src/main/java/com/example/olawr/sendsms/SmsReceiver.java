@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MicrophoneInfo;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class SmsReceiver extends BroadcastReceiver {
                 str += "Order Received: " +
                 recMsg[i].getOriginatingAddress();
                 str += "=>"+recMsg[i].getMessageBody().toString();
+                MainActivity.getInstance().setNumber(recMsg[i].getOriginatingAddress().toString());
             }
             Toast.makeText(context,str,Toast.LENGTH_LONG).show();
             MainActivity.getInstance().setText(str);
